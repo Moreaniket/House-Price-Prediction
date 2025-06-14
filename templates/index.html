@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #343a40;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background-color: #007bff;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 25px;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🏠 House Price Prediction</h2>
+        {% if prediction_text %}
+            <h3>{{ prediction_text }}</h3>
+        {% endif %}
+
+        <form method="POST" action="/predict">
+            <label for="location">Location:</label>
+            <select name="location" id="location" required>
+                {% for loc in locations %}
+                    <option value="{{ loc }}">{{ loc }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="bhk">BHK:</label>
+            <input type="number" name="bhk" id="bhk" min="1" required>
+
+            <label for="bath">Bathroom:</label>
+            <input type="number" name="bath" id="bath" min="1" required>
+
+            <label for="balcony">Bedroom:</label>
+            <input type="number" name="balcony" id="balcony" min="1" required>
+
+            <label for="sqft">Sqft Area:</label>
+            <input type="number" name="sqft" id="sqft" min="100" required>
+
+            <label for="area_type">Area Type:</label>
+            <select name="area_type" id="area_type" required>
+                <option value="Plot  Area">Plot Area</option>
+            </select>
+
+            <label for="availability">Availability:</label>
+            <select name="availability" id="availability" required>
+                <option value="Not Ready">Not Ready</option>
+            </select>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+
+    </div>
+</body>
+</html>
